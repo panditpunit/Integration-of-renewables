@@ -1,0 +1,70 @@
+file_data = pd.read_csv(folder+'data.csv', sep=';', header=0, index_col=0, usecols=['t', 'Demand', 'PV1', 'PV2', 'W1', 'W2'])
+file_techparam = pd.read_csv(folder+'techparam.csv',sep=',', header=0, index_col=0, usecols=['CAPEX', 'OPEX'])
+
+
+## Sets ##
+
+# Time set
+l_t = list(file_data.index.values)
+
+def set_t():
+    """Defining time set"""
+    return l_t
+
+# Tech sets
+
+l_tech = list(file_techparam.index.values)
+
+def set_tech():
+    """Define technology based set"""
+    return l_tech
+
+
+# Economic parameters
+def param_CAPEX():
+    """Economic Parameter -- CAPEX
+    Returns a dictionary of CAPEX vales based on technology"""
+    dict_CAPEX = {tech: file_techparam['CAPEX'][tech] for tech in l_tech}
+    return dict_CAPEX
+
+def param_OPEX():
+    """Economic Parameter -- OPEX
+    Returns a dictionary of OPEX vales based on technology"""
+    dict_OPEX = {tech: file_techparam['OPEX'][tech] for tech in l_tech}
+    return dict_OPEX
+
+# Demand
+
+def param_D():
+    """Parameter -- Demand
+    Gives a dictionary full of demand corresponding to the timestamps"""
+    dict_demand = {t: file_data['Demand'][t] for t in l_t}
+    return dict_demad
+    
+# Renewable parameters
+
+def param_PV1():
+    """Parameter -- PhotoVoltaic 1
+    Gives a dictionary of PV generation of location 1 for each hour """
+    dict_PV1 = {t: file_data['PV1'][t] for t in l_t}
+    return dict_PV1
+
+def param_PV2():
+    """Parameter -- PhotoVoltaic 2
+    Gives a dictionary of PV generation of location 2 for each hour """
+    dict_PV2 = {t: file_data['PV2'][t] for t in l_t}
+    return dict_PV2
+    
+def param_wind1():
+    """Parameter -- Wind produciton 1
+    Gives a dictionary of Wind generation of loaction 1 for each hour"""
+    dict_wind1 = {t: file_data['W1'][t] for t in l_t}
+    return dict_wind1
+    
+def param_wind2():
+    """Parameter -- Wind produciton 1
+    Gives a dictionary of Wind generation of loaction 2 for each hour"""
+    dict_wind2={t: file_data['W2'][t] for t in l_t}
+    return dict_wind2
+
+
